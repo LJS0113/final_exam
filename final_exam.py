@@ -30,19 +30,19 @@ def home():
 
 @app.route("/btn/on", methods=['GET'])
 def btn_on():
-        GPIO.output(TRIG, True)   # Triger 핀에  펄스신호를 만들기 위해 1 출력
-        time.sleep(0.00001)       # 10µs 딜레이 
-        GPIO.output(TRIG, False)
+    GPIO.output(TRIG, True)   # Triger 핀에  펄스신호를 만들기 위해 1 출력
+    time.sleep(0.00001)       # 10µs 딜레이 
+    GPIO.output(TRIG, False)
         
-        while GPIO.input(ECHO)==0:
-            start = time.time()	 # Echo 핀 상승 시간 
-        while GPIO.input(ECHO)==1:
-            stop= time.time()	 # Echo 핀 하강 시간 
+    while GPIO.input(ECHO)==0:
+        start = time.time()	 # Echo 핀 상승 시간 
+    while GPIO.input(ECHO)==1:
+        stop= time.time()	 # Echo 핀 하강 시간 
         
-        check_time = stop - start
-        distance = check_time * 34300 / 2
-        time.sleep(0.4)	# 0.4초 간격으로 센서 측정 +
-        return render_template('index.html', distance = distance)
+    check_time = stop - start
+    distance = check_time * 34300 / 2
+    time.sleep(0.4)	# 0.4초 간격으로 센서 측정 +
+    return str(distance)
 
 
 if __name__ == "__main__":
